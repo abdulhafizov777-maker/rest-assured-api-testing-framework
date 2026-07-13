@@ -1,0 +1,85 @@
+name: Allure Report
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Run REST Assured suite
+        run: mvn --batch-mode --no-transfer-progress clean test
+
+      - name: Verify exact test totals
+        shell: python
+        run: |
+          import glob
+          import sys
+          import xml.etree.ElementTree as ET
+
+          totals = {"tests": 0, "failures": 0, "errors": 0, "skipped": 0}
+          reports = glob.glob("target/surefire-reports/TEST-*.xml")
+          for report in reports:
+              suite = ET.parse(report).getroot()
+              for key in totals:
+                  totals[key] += int(suite.attrib.get(key, 0))
+
+          print(
+              f"Tests run: {totals['tests']}, Failures: {totals['failures']}, "
+              f"Errors: {totals['errors']}, Skipped: {totals['skipped']}"
+          )
+          expected = {"tests": 500, "failures": 0, "errors": 0, "skipped": 0}
+          if totals != expected:
+              sys.exit(f"Unexpected Surefire totals: {totals}")
+
+      - name: Generate Allure HTML report
+        run: mvn --batch-mode --no-transfer-progress allure:report
+
+      - name: Upload Allure report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: target/site/allure-maven-plugin
+          if-no-files-found: error
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: target/site/allure-maven-plugin
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Allure report to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,24 +1,15 @@
-import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
-class SmokeApiTest {
-
-    @BeforeAll
-    static void setup() {
-        RestAssured.baseURI = "https://httpbin.org";
-    }
-
+class SmokeApiTest extends ApiTestBase {
     @Test
-    void smoke_shouldReturn200() {
+    void smokeShouldReturnHealthyLocalApiResponse() {
         given()
-                .header("User-Agent", "Mozilla/5.0")
-                .header("Accept", "application/json")
-                .when()
-                .get("/get")
+                .when().get("/health")
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("status", equalTo("UP"));
     }
 }

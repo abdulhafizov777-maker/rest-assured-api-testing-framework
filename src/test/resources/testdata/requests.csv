@@ -1,16 +1,16 @@
-step,method,endpoint,expectedStatus,body,saveVar
-1_CREATE_PET,POST,/pet,200,"{""id"":0,""category"":{""id"":1,""name"":""dogs""},""name"":""Rex"",""photoUrls"":[""string""],""tags"":[{""id"":1,""name"":""tag1""}],""status"":""available""}",petId=$.id
-2_GET_CREATED,GET,/pet/{{petId}},200,null,null
-3_UPDATE_PET,PUT,/pet,200,"{""id"":{{petId}},""category"":{""id"":1,""name"":""dogs""},""name"":""Rex-Updated"",""photoUrls"":[""string""],""tags"":[{""id"":1,""name"":""tag1""}],""status"":""available""}",null
-4_GET_UPDATED,GET,/pet/{{petId}},200,null,null
-5_FIND_PENDING,GET,/pet/findByStatus?status=pending,200,null,null
-6_FIND_AVAILABLE,GET,/pet/findByStatus?status=available,200,null,null
-7_CREATE_2ND,POST,/pet,200,"{""id"":0,""category"":{""id"":2,""name"":""cats""},""name"":""Mia"",""photoUrls"":[""string""],""tags"":[{""id"":2,""name"":""tag2""}],""status"":""pending""}",petId2=$.id
-8_GET_2ND,GET,/pet/{{petId2}},200,null,null
-9_UPDATE_2ND,PUT,/pet,200,"{""id"":{{petId2}},""category"":{""id"":2,""name"":""cats""},""name"":""Mia-Updated"",""photoUrls"":[""string""],""tags"":[{""id"":2,""name"":""tag2""}],""status"":""sold""}",null
-10_GET_2ND_UPDATED,GET,/pet/{{petId2}},200,null,null
-11_DELETE_2ND,DELETE,/pet/{{petId2}},200,null,null
-12_GET_2ND_AFTER_DELETE,GET,/pet/{{petId2}},200,null,null
-13_DELETE_1ST,DELETE,/pet/{{petId}},200,null,null
-14_GET_1ST_AFTER_DELETE,GET,/pet/{{petId}},200,null,null
-15_FIND_SOLD,GET,/pet/findByStatus?status=sold,200,null,null
+step,method,endpoint,expectedStatus,body
+1_HEALTH,GET,/health,200,null
+2_GET_ITEM,GET,/items/101,200,null
+3_CREATE_ITEM,POST,/items,201,"{ ""name"": ""ddt-create"", ""status"": ""active"" }"
+4_REPLACE_ITEM,PUT,/items/104,200,"{ ""name"": ""ddt-replaced"", ""status"": ""inactive"" }"
+5_PATCH_ITEM,PATCH,/items/105,200,"{ ""status"": ""archived"" }"
+6_DELETE_ITEM,DELETE,/items/106,204,null
+7_LIST_ITEMS,GET,/items?page=2&size=10,200,null
+8_FILTER_ITEMS,GET,/items?status=active&category=books,200,null
+9_SORT_ITEMS,GET,/items?sort=name&order=desc,200,null
+10_INVALID_PAGE,GET,/items?page=0&size=10,400,null
+11_NOT_FOUND,GET,/items/900011,404,null
+12_INVALID_CREATE,POST,/items,400,"{ ""status"": ""active"" }"
+13_INVALID_REPLACE,PUT,/items/113,400,"{ ""name"": ""missing-status"" }"
+14_DUPLICATE,POST,/items,409,"{ ""name"": ""duplicate-ddt"" }"
+15_ERROR_RESPONSE,GET,/errors/422,422,null

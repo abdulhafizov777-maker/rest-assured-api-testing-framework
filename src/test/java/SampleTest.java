@@ -1,10 +1,18 @@
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-class SampleTest {
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
+class SampleTest extends ApiTestBase {
     @Test
-    void junitIshlayaptimi() {
-        assertEquals(2, 1 + 1);
+    void localApiHealthIncludesServiceIdentity() {
+        given()
+                .when().get("/health")
+                .then()
+                .statusCode(200)
+                .contentType("application/json")
+                .header("X-Mock-API", "local")
+                .body("status", equalTo("UP"))
+                .body("service", equalTo("local-mock-api"));
     }
 }

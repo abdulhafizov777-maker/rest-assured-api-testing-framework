@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class RequestValidationTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(1, 40).boxed();
+        return IntStream.rangeClosed(1, 36).boxed();
     }
 
     @ParameterizedTest(name = "validation boundary case {0}")

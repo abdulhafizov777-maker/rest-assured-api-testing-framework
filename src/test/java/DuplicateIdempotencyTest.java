@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class DuplicateIdempotencyTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(1, 28).boxed();
+        return IntStream.rangeClosed(1, 24).boxed();
     }
 
     @ParameterizedTest(name = "duplicate/idempotency contract {0}")

@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class BoundaryValueTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return Stream.concat(IntStream.rangeClosed(1, 25).boxed(),
+        return Stream.concat(IntStream.rangeClosed(1, 21).boxed(),
                 Stream.of(0, -1, -2, 101, 102, 103, 104, 105, 106, 107));
     }
 

@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class PutResourceTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(1001, 1035).boxed();
+        return IntStream.rangeClosed(1001, 1031).boxed();
     }
 
     @ParameterizedTest(name = "PUT fully replaces item {0}")

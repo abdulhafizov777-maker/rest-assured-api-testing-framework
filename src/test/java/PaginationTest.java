@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class PaginationTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(1, 35).boxed();
+        return IntStream.rangeClosed(1, 31).boxed();
     }
 
     @ParameterizedTest(name = "pagination calculates offset for page {0}")

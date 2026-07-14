@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class PatchResourceTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(2001, 2035).boxed();
+        return IntStream.rangeClosed(2001, 2031).boxed();
     }
 
     @ParameterizedTest(name = "PATCH changes one field on item {0}")

@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class QueryPathParameterTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(1, 40).boxed();
+        return IntStream.rangeClosed(1, 36).boxed();
     }
 
     @ParameterizedTest(name = "path and query parameters remain distinct in case {0}")

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PostResourceTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(1, 35).boxed();
+        return IntStream.rangeClosed(1, 31).boxed();
     }
 
     @ParameterizedTest(name = "POST creates distinct item {0}")

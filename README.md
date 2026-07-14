@@ -1,6 +1,6 @@
 # REST Assured API Test Automation
 
-This repository contains a deterministic 500-test API automation suite built with Java 17, JUnit 5, REST Assured, data-driven CSV tests, and Allure reporting. The tests exercise the repository's local mock API, so the suite does not depend on an external service.
+This repository contains a deterministic 451-test API automation suite built with Java 17, JUnit 5, REST Assured, data-driven CSV tests, and Allure reporting. The tests exercise the repository's local mock API, so the suite does not depend on an external service.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ This repository contains a deterministic 500-test API automation suite built wit
 mvn clean test
 ```
 
-All 500 tests run during the Maven `test` phase. Surefire XML reports are written under `target/surefire-reports`, and the Allure JUnit 5 adapter writes raw results to `target/allure-results`.
+All 451 tests run during the Maven `test` phase. Surefire XML reports are written under `target/surefire-reports`, and the Allure JUnit 5 adapter writes raw results to `target/allure-results`.
 
 ## Generate an Allure report locally
 
@@ -35,7 +35,7 @@ The report commands use the Allure Maven plugin, so a separate system-wide Allur
 
 ## GitHub Pages
 
-The `Allure Report` GitHub Actions workflow runs on pushes to `main` and on manual dispatch. It uses Java 17, verifies the exact 500-test total, generates the Allure HTML report, uploads it as a workflow artifact, and deploys the same report to GitHub Pages.
+The `Allure Report` GitHub Actions workflow runs on pushes to `main` and on manual dispatch. It uses Java 17, verifies the exact 451-test total, generates the Allure HTML report, uploads it as a workflow artifact, and deploys the same report to GitHub Pages.
 
 Before the first deployment, configure the repository's Pages source as **GitHub Actions** under **Settings → Pages**.
 

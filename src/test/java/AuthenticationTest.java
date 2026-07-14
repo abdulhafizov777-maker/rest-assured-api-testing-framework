@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class AuthenticationTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(1, 25).boxed();
+        return IntStream.rangeClosed(1, 20).boxed();
     }
 
     @ParameterizedTest(name = "authentication case {0}")

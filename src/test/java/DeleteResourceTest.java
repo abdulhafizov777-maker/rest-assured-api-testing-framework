@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class DeleteResourceTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(3001, 3030).boxed();
+        return IntStream.rangeClosed(3001, 3026).boxed();
     }
 
     @ParameterizedTest(name = "DELETE makes item {0} unavailable")

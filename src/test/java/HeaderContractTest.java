@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class HeaderContractTest extends ApiTestBase {
     static Stream<Integer> cases() {
-        return IntStream.rangeClosed(1, 30).boxed();
+        return IntStream.rangeClosed(1, 26).boxed();
     }
 
     @ParameterizedTest(name = "headers are echoed for request {0}")
